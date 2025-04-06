@@ -83,19 +83,6 @@ if (isset($_POST['username']) && isset($_POST['password'])) { // Verificar se o 
             <button type="submit" class="formBtn" style="color: white;">Submit</button>
         </form>
     </div>
-    <footer class="bg-body-transparent">
-        <div class="d-flex justify-content-between align-items-center">
-            <div class="text-center p-3 ms-5">
-                <a href="https://duartelacerda.github.io" target="_blank"><img class="img-fluid footerPic" src="../assets/imagens/signed.png"
-                        alt="Duarte Lacerda" width="150"></a>
-            </div>
-            <div class="text-center p-3 me-5">
-                <a href="https://www.ipleiria.pt/curso/licenciatura-em-engenharia-informatica/" target="_blank">
-                    <p style="color: white;"><img class="footerPic" src="../assets/imagens/estg.png" alt="ESTG" width="150"></p>
-                </a>
-            </div>
-        </div>
-    </footer>
 </body>
 
 </html>

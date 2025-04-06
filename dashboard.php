@@ -12,18 +12,18 @@ $temperatura = array( // Array associativa para armazenar os dados da temperatur
     "log" => file_get_contents("api/temperatura/log.txt")
 );
 
-$humidade = array( // Array associativa para armazenar os dados da humidade
-    "valor" => file_get_contents("api/humidade/valor.txt"),
-    "hora" => file_get_contents("api/humidade/hora.txt"),
-    "nome" => file_get_contents("api/humidade/nome.txt"),
-    "log" => file_get_contents("api/humidade/log.txt")
+$servo = array( // Array associativa para armazenar os dados da servo
+    "valor" => file_get_contents("api/servo/valor.txt"),
+    "hora" => file_get_contents("api/servo/hora.txt"),
+    "nome" => file_get_contents("api/servo/nome.txt"),
+    "log" => file_get_contents("api/servo/log.txt")
 );
 
-$led = array( // Array associativa para armazenar os dados da led
-    "valor" => file_get_contents("api/led/valor.txt"),
-    "hora" => file_get_contents("api/led/hora.txt"),
-    "nome" => file_get_contents("api/led/nome.txt"),
-    "log" => file_get_contents("api/led/log.txt")
+$us = array( // Array associativa para armazenar os dados da ultrasonico
+    "valor" => file_get_contents("api/ultrasonico/valor.txt"),
+    "hora" => file_get_contents("api/ultrasonico/hora.txt"),
+    "nome" => file_get_contents("api/ultrasonico/nome.txt"),
+    "log" => file_get_contents("api/ultrasonico/log.txt")
 );
 
 function formatNumber($number)
@@ -92,33 +92,33 @@ function formatNumber($number)
             <div class="col-sm-4 mb-2">
                 <div class="card text-center">
                     <div class="card-header sensor">
-                        <p class="mb-0">Humidade: 70%</p>
+                        <p class="mb-0">Cancela: <?php echo $servo['valor']; ?> </p>
                     </div>
                     <div class="card-body">
                         <img src="assets/imagens/humidity-high.png" alt="humidade">
                     </div>
                     <div class="card-footer">
-                        <p class="mb-0"><span class="fw-bold">Atualizado: </span>2025/03/09 18:25 - <a
-                                href="history.php?nome=humidade">Histórico</a></p>
+                        <p class="mb-0"><span class="fw-bold">Atualizado: </span><?php echo $servo["hora"]; ?> - <a
+                                href="history.php?nome=servo">Histórico</a></p>
                     </div>
                 </div>
             </div>
             <div class="col-sm-4 mb-2">
                 <div class="card text-center">
                     <div class="card-header atuador">
-                        <p class="mb-0">Led Arduino: Ligado</p>
+                        <p class="mb-0">Distancia Cancela: <?php echo formatNumber($temperatura['valor']); ?>cm </p>
                     </div>
                     <div class="card-body">
                         <img src="assets/imagens/light-on.png" alt="led">
                     </div>
                     <div class="card-footer">
-                        <p class="mb-0"><span class="fw-bold">Atualizado: </span>2025/03/09 18:25 - <a
-                                href="history.php?nome=led">Histórico</a></p>
+                        <p class="mb-0"><span class="fw-bold">Atualizado: </span><?php echo $us["hora"]; ?> <a
+                                href="history.php?nome=ultrasonico">Histórico</a></p>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row mt-4 mb-2">
+        <div class="row mt-4 mb-4">
             <div class="card">
                 <div class="card-header fw-bold">
                     Tabela de Sensores
@@ -156,18 +156,16 @@ function formatNumber($number)
                                 ?>
                             </tr>
                             <tr>
-                                <td><a href="history.php?nome=humidade"><?php echo $humidade["nome"]; ?></a></td>
-                                <td><?php echo formatNumber($humidade['valor']); ?>%</td>
-                                <td><?php echo $humidade["hora"]; ?></td>
+                                <td><a href="history.php?nome=servo"><?php echo $servo["nome"]; ?></a></td>
+                                <td><?php echo formatNumber($servo['valor']); ?>º</td>
+                                <td><?php echo $servo["hora"]; ?></td>
                                 <?php
                                 switch (true) {
-                                    case "humidade":
-                                        if ($dado["valor"] >= 80.00) {
-                                            echo "<td><span class='badge bg-danger'>Crítico</span></td>";
-                                        } elseif ($dado["valor"] > 50.00 && $dado["valor"] < 80.00) {
-                                            echo "<td><span class='badge bg-warning'>Elevado</span></td>";
-                                        } else {
-                                            echo "<td><span class='badge bg-primary'>Normal</span></td>";
+                                    case "servo":
+                                        if ($servo["valor"] >= 80.00) {
+                                            echo "<td><span class='badge bg-success'>Fechado</span></td>";
+                                        } elseif ($servo["valor"] < 80.00) {
+                                            echo "<td><span class='badge bg-danger'>Aberto</span></td>";
                                         }
                                         break;
                                     default:
@@ -177,16 +175,25 @@ function formatNumber($number)
                                 ?>
                             </tr>
                             <tr>
-                                <td><a href="history.php?nome=led"><?php echo $led["nome"]; ?></a></td>
-                                <td><?php echo ($led["valor"] == 1) ? "Ativado" : "Desativado"; ?></td>
-                                <td><?php echo $led["hora"]; ?></td>
+                                <td><a href="history.php?nome=ultrasonico"><?php echo $us["nome"]; ?></a></td>
+                                <td><?php echo formatNumber($us["valor"]); ?>cm</td>
+                                <td><?php echo $us["hora"]; ?></td>
                                 <?php
                                 switch (true) {
-                                    case ($led["valor"] == 1):
-                                        echo "<td><span class='badge bg-success'>Ligado</span></td>";
+                                    case ($us["valor"] >= 100.00):
+                                        echo "<td><span class='badge bg-danger'>Muito Longe</span></td>";
                                         break;
-                                    case ($led["valor"] == 0):
-                                        echo "<td><span class='badge bg-danger'>Desligado</span></td>";
+                                    case ($us["valor"] > 50.00 && $us["valor"] < 100.00):
+                                        echo "<td><span class='badge bg-danger'>Longe</span></td>";
+                                        break;
+                                    case ($us["valor"] <= 50.00 && $us["valor"] > 20.00):
+                                        echo "<td><span class='badge bg-warning'>+/- Longe</span></td>";
+                                        break;
+                                    case ($us["valor"] <= 20.00 && $us["valor"] > 10.00):
+                                        echo "<td><span class='badge bg-warning'>Perto</span></td>";
+                                        break;
+                                    case ($us["valor"] <= 10.00 && $us["valor"] > 0.00):
+                                        echo "<td><span class='badge bg-success'>Muito Perto</span></td>";
                                         break;
                                     default:
                                         echo "<td class='badge bg-secondary'>Número negativo | Erro de sensor!!</td>";

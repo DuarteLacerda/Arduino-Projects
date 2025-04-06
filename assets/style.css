@@ -153,7 +153,7 @@ a {
 footer {
     background-color: transparent;
     border: none;
-    position: fixed;
+    position: sticky;
     /* Mantém o rodapé fixo no fundo da página */
     bottom: 0;
     width: 100%;

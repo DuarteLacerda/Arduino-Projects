@@ -31,7 +31,7 @@ foreach ($logData as $linha) { // Processar cada linha do ficheiro
     if (count($dados) == 2) {
         $historico[] = [
             "hora" => trim($dados[0]), // A hora deve ser uma string
-            "valor" => (float) trim($dados[1]) // O valor deve ser um número
+            "valor" => trim($dados[1]) // O valor deve ser uma string
         ];
     }
 }
@@ -76,16 +76,15 @@ $historico = array_slice($historico, 0, 50);
                     <?php foreach ($historico as $dado): ?>
                         <tr>
                             <td><?php
-                                echo formatNumber($dado["valor"]);
                                 switch ($nome) {
                                     case "temperatura":
-                                        echo "°C";
+                                        echo formatNumber($dado["valor"]) . "°C";
                                         break;
-                                    case "humidade":
-                                        echo "%";
+                                    case "servo":
+                                        echo formatNumber($dado["valor"]) . "º";
                                         break;
-                                    default:
-                                        echo "";
+                                    case "ultrasonico":
+                                        echo formatNumber($dado["valor"]) . "cm";
                                         break;
                                 } ?>
                             </td>
@@ -104,22 +103,26 @@ $historico = array_slice($historico, 0, 50);
                                             echo "<span class='badge bg-secondary'>Número negativo | Erro de sensor!!</span>";
                                         }
                                         break;
-                                    case "humidade":
+                                    case "servo":
                                         if ($dado["valor"] >= 80.00) {
-                                            echo "<span class='badge bg-danger'>Crítico</span>";
-                                        } elseif ($dado["valor"] > 50.00 && $dado["valor"] < 80.00) {
-                                            echo "<span class='badge bg-warning'>Elevado</span>";
-                                        } elseif ($dado["valor"] <= 50.00 && $dado["valor"] > 0.00) {
-                                            echo "<span class='badge bg-primary'>Normal</span>";
+                                            echo "<span class='badge bg-success'>Fechado</span>";
+                                        } elseif ($dado["valor"] < 80.00) {
+                                            echo "<span class='badge bg-danger'>Aberto</span>";
                                         } else {
                                             echo "<span class='badge bg-secondary'>Número negativo | Erro de sensor!!</span>";
                                         }
                                         break;
-                                    case "led":
-                                        if ($dado["valor"] == 1) {
-                                            echo "<span class='badge bg-success'>Ligado</span>";
-                                        } elseif ($dado["valor"] == 0) {
-                                            echo "<span class='badge bg-danger'>Desligado</span>";
+                                    case "ultrasonico":
+                                        if ($dado["valor"] >= 100.00) {
+                                            echo "<span class='badge bg-danger'>Muito Longe</span>";
+                                        } elseif ($dado["valor"] > 50.00 && $dado["valor"] < 100.00) {
+                                            echo "<span class='badge bg-danger'>Longe</span>";
+                                        } elseif ($dado["valor"] <= 50.00 && $dado["valor"] > 20.00) {
+                                            echo "<span class='badge bg-warning'>+/- Longe</span>";
+                                        } elseif ($dado["valor"] <= 20.00 && $dado["valor"] > 10.00) {
+                                            echo "<span class='badge bg-warning'>Perto</span>";
+                                        } elseif ($dado["valor"] <= 10.00 && $dado["valor"] > 0.00) {
+                                            echo "<span class='badge bg-success'>Muito Perto</span>";
                                         } else {
                                             echo "<span class='badge bg-secondary'>Número negativo | Erro de sensor!!</span>";
                                         }
@@ -133,7 +136,7 @@ $historico = array_slice($historico, 0, 50);
             </table>
 
         </div>
-        <div class="text-end mt-4">
+        <div class="text-end mt-4 mb-4">
             <form action="dashboard.php" method="GET">
                 <button class="btn btn-outline-dark">Voltar</button>
             </form>
