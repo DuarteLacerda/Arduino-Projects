@@ -45,7 +45,6 @@ if (isset($_POST['username']) && isset($_POST['password'])) { // Verificar se o 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TI - Servidor IoT</title>
-    <meta name="author" content="Duarte Lacerda">
     <link rel="icon" href="../assets/imagens/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="../assets/style.css">
     <link rel="stylesheet" href="../assets/login.css">
