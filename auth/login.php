@@ -48,6 +48,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) { // Verificar se o 
     <meta name="author" content="Duarte Lacerda">
     <link rel="icon" href="../assets/imagens/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="../assets/style.css">
+    <link rel="stylesheet" href="../assets/login.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <script src="assets/script.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
