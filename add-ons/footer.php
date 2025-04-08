@@ -4,7 +4,7 @@
             <a href="https://www.ipleiria.pt/curso/licenciatura-em-engenharia-informatica/" target="_blank"><img src="assets/imagens/ei.png" alt="Duarte Lacerda" class="img-fluid" width="200"></a>
         </div>
         <div class="text-center">
-            <a href="https://www.ipleiria.pt/curso/licenciatura-em-engenharia-informatica/" target="_blank"><img src="assets/imagens/estg.png" alt="ESTG" width="200"></a>
+            <a href="https://duartelacerda.github.io" target="_blank"><img src="assets/imagens/Duarte Lacerda.png" alt="ESTG" width="200"></a>
         </div>
     </div>
 </footer>
