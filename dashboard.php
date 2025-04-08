@@ -47,161 +47,163 @@ function formatNumber($number)
 </head>
 
 <body>
-    <div class="container">
-        <?php include("add-ons/nav.php"); ?>
-        <div class="row mt-4">
-            <div id="title-header" class="col-md-6">
-                <h1>Servidor IoT</h1>
-                <h6 class="user-logo" id="user-name"><img src="assets/imagens/user.png" alt="Fotografia do utilizador" width="25"> <?php echo $_SESSION['username'] ?></h6>
+    <div id="content">
+        <div class="container-fluid">
+            <?php include("add-ons/nav.php"); ?>
+            <div class="row mt-4">
+                <div id="title-header" class="col-md-6 col-sm-5 text-center">
+                    <h1>Servidor IoT</h1>
+                    <h6 class="user-logo" id="user-name"><img src="assets/imagens/user.png" alt="Fotografia do utilizador" width="25"> <?php echo $_SESSION['username'] ?></h6>
+                </div>
+                <div id="logo-header" class="col-md-6 col-sm-5 text-center">
+                    <a href="https://duartelacerda.github.io" target="_blank"><img class="estg" src="assets/imagens/Duarte Lacerda.png"
+                            alt="Politécnico de Leiria"></a>
+                </div>
             </div>
-            <div id="logo-header" class="col-md-6">
-                <a href="https://duartelacerda.github.io" target="_blank"><img class="estg" src="assets/imagens/Duarte Lacerda.png"
-                        alt="Politécnico de Leiria"></a>
+            <div class="row mt-2 mb-2">
+                <div class="col-sm-4 mb-2">
+                    <div class="card bg-c-green order-card">
+                        <div class="card-block">
+                            <h6 class="m-b-20"><strong><?php echo $temperatura["nome"]; ?></strong></h6>
+                            <h3 class="text-right"><i class="fa-solid fa-temperature-half pulse"></i><span> <?php echo $temperatura["valor"]; ?>ºC</span></h3>
+                            <p class="m-b-0"><strong>Last updatde: <?php echo $temperatura["hora"]; ?><span class="f-right"><a href="history.php?nome=temperatura&nometxt">Histórico</a></strong></span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 mb-2">
+                    <div class="card bg-c-blue order-card">
+                        <div class="card-block">
+                            <h6 class="m-b-20"><strong>Humidade</strong></h6>
+                            <h3 class="text-right"><i class="fa-solid fa-droplet pulse"></i><span> 53%</span></h3>
+                            <p class="m-b-0"><strong>Last updatde: 2025/04/07 15:47:33<span class="f-right"><a href="history.php?nome=humidade&nometxt">Histórico</a></strong></span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 mb-2">
+                    <div class="card bg-c-yellow order-card">
+                        <div class="card-block">
+                            <h6 class="m-b-20"><strong><?php echo $us["nome"]; ?></strong></h6>
+                            <h3 class="text-right"><i class="fa-solid fa-people-arrows pulse"></i><span> <?php echo $us["valor"]; ?>º</span></h3>
+                            <p class="m-b-0"><strong>Last updatde: <?php echo $us["hora"]; ?><span class="f-right"><a href="history.php?nome=ultrasonico&nometxt">Histórico</a></strong></span></p>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <div class="row mt-2 mb-2">
+                <div class="col-sm-4 mb-2">
+                    <div class="card bg-c-orange order-card">
+                        <div class="card-block">
+                            <h6 class="m-b-20"><strong>Ventoinha</strong></h6>
+                            <h3 class="text-right"><i class="fa-solid fa-fan spin"></i><span> 59 RPM</span></h3>
+                            <p class="m-b-0"><strong>Last updatde: 2025/04/07 15:47:33<span class="f-right"><a href="history.php?nome=ventoinha&nometxt">Histórico</a></strong></span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 mb-2">
+                    <div class="card bg-c-pink order-card">
+                        <div class="card-block">
+                            <h6 class="m-b-20"><strong><?php echo $servo["nome"]; ?></strong></h6>
+                            <h3 class="text-right"><i class="fa-solid fa-door-open pulse"></i><span> <?php echo $servo["valor"]; ?>º</span></h3>
+                            <p class="m-b-0"><strong>Last updatde: 2025/04/07 15:47:33<span class="f-right"><a href="history.php?nome=servo&nometxt">Histórico</a></strong></span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 mb-2">
+                    <div class="card bg-c-purple order-card">
+                        <div class="card-block">
+                            <h6 class="m-b-20"><strong>Led</strong></h6>
+                            <h3 class="text-right"><i class="fa-solid fa-sun spin_reverse"></i></i><span> Ligado</span></h3>
+                            <p class="m-b-0"><strong>Last updatde: 2025/04/07 15:47:33<span class="f-right"><a href="history.php?nome=led&nometxt">Histórico</a></strong></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <h2>Tabela de Sensores</h2>
+                <div class="table-responsive-sm">
+                    <table class="table table-bordered table-striped text-center">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Tipo de Dispositivo IoT</th>
+                                <th>Valor</th>
+                                <th>Data de Atualização</th>
+                                <th>Estado Alertas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="history.php?nome=temperatura&nometxt"><?php echo $temperatura["nome"]; ?></a></td>
+                                <td><?php echo formatNumber($temperatura['valor']); ?>º</td>
+                                <td><?php echo $temperatura["hora"]; ?></td>
+                                <?php
+                                switch (true) {
+                                    case ($temperatura["valor"] >= 40.00):
+                                        echo "<td><span class='badge bg-danger'>Crítico</span></td>";
+                                        break;
+                                    case ($temperatura["valor"] > 20.00 && $temperatura["valor"] < 40.00):
+                                        echo "<td><span class='badge bg-warning'>Elevado</span></td>";
+                                        break;
+                                    case ($temperatura["valor"] <= 20.00):
+                                        echo "<td><span class='badge bg-success'>Normal</span></td>";
+                                        break;
+                                    default:
+                                        echo "<td class='badge bg-secondary'>Número negativo | Erro de sensor!!</td>";
+                                        break;
+                                }
+                                ?>
+                            </tr>
+                            <tr>
+                                <td><a href="history.php?nome=servo&nometxt"><?php echo $servo["nome"]; ?></a></td>
+                                <td><?php echo formatNumber($servo['valor']); ?>º</td>
+                                <td><?php echo $servo["hora"]; ?></td>
+                                <?php
+                                switch (true) {
+                                    case "servo":
+                                        if ($servo["valor"] >= 80.00) {
+                                            echo "<td><span class='badge bg-success'>Fechado</span></td>";
+                                        } elseif ($servo["valor"] < 80.00) {
+                                            echo "<td><span class='badge bg-danger'>Aberto</span></td>";
+                                        }
+                                        break;
+                                    default:
+                                        echo "<td class='badge bg-secondary'>Número negativo | Erro de sensor!!</td>";
+                                        break;
+                                }
+                                ?>
+                            </tr>
+                            <tr>
+                                <td><a href="history.php?nome=ultrasonico&nometxt"><?php echo $us["nome"]; ?></a></td>
+                                <td><?php echo formatNumber($us["valor"]); ?>cm</td>
+                                <td><?php echo $us["hora"]; ?></td>
+                                <?php
+                                switch (true) {
+                                    case ($us["valor"] >= 100.00):
+                                        echo "<td><span class='badge bg-danger'>Muito Longe</span></td>";
+                                        break;
+                                    case ($us["valor"] > 50.00 && $us["valor"] < 100.00):
+                                        echo "<td><span class='badge bg-danger'>Longe</span></td>";
+                                        break;
+                                    case ($us["valor"] <= 50.00 && $us["valor"] > 20.00):
+                                        echo "<td><span class='badge bg-warning'>+/- Longe</span></td>";
+                                        break;
+                                    case ($us["valor"] <= 20.00 && $us["valor"] > 10.00):
+                                        echo "<td><span class='badge bg-warning'>Perto</span></td>";
+                                        break;
+                                    case ($us["valor"] <= 10.00 && $us["valor"] > 0.00):
+                                        echo "<td><span class='badge bg-success'>Muito Perto</span></td>";
+                                        break;
+                                    default:
+                                        echo "<td class='badge bg-secondary'>Número negativo | Erro de sensor!!</td>";
+                                        break;
+                                }
+                                ?>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <?php include("add-ons/footer.php"); ?>
         </div>
-        <div class="row mt-2 mb-2">
-            <div class="col-sm-4 mb-2">
-                <div class="card bg-c-green order-card">
-                    <div class="card-block">
-                        <h6 class="m-b-20"><strong><?php echo $temperatura["nome"]; ?></strong></h6>
-                        <h3 class="text-right"><i class="fa-solid fa-temperature-half pulse"></i><span> <?php echo $temperatura["valor"]; ?>ºC</span></h3>
-                        <p class="m-b-0"><strong>Last updatde: <?php echo $temperatura["hora"]; ?><span class="f-right"><a href="history.php?nome=temperatura&nometxt">Histórico</a></strong></span></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 mb-2">
-                <div class="card bg-c-blue order-card">
-                    <div class="card-block">
-                        <h6 class="m-b-20"><strong>Humidade</strong></h6>
-                        <h3 class="text-right"><i class="fa-solid fa-droplet pulse"></i><span> 53%</span></h3>
-                        <p class="m-b-0"><strong>Last updatde: 2025/04/07 15:47:33<span class="f-right"><a href="history.php?nome=humidade&nometxt">Histórico</a></strong></span></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 mb-2">
-                <div class="card bg-c-yellow order-card">
-                    <div class="card-block">
-                        <h6 class="m-b-20"><strong><?php echo $us["nome"]; ?></strong></h6>
-                        <h3 class="text-right"><i class="fa-solid fa-people-arrows pulse"></i><span> <?php echo $us["valor"]; ?>º</span></h3>
-                        <p class="m-b-0"><strong>Last updatde: <?php echo $us["hora"]; ?><span class="f-right"><a href="history.php?nome=ultrasonico&nometxt">Histórico</a></strong></span></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-2 mb-2">
-            <div class="col-sm-4 mb-2">
-                <div class="card bg-c-orange order-card">
-                    <div class="card-block">
-                        <h6 class="m-b-20"><strong>Ventoinha</strong></h6>
-                        <h3 class="text-right"><i class="fa-solid fa-fan spin"></i><span> 59 RPM</span></h3>
-                        <p class="m-b-0"><strong>Last updatde: 2025/04/07 15:47:33<span class="f-right"><a href="history.php?nome=ventoinha&nometxt">Histórico</a></strong></span></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 mb-2">
-                <div class="card bg-c-pink order-card">
-                    <div class="card-block">
-                        <h6 class="m-b-20"><strong><?php echo $servo["nome"]; ?></strong></h6>
-                        <h3 class="text-right"><i class="fa-solid fa-door-open pulse"></i><span> <?php echo $servo["valor"]; ?>º</span></h3>
-                        <p class="m-b-0"><strong>Last updatde: 2025/04/07 15:47:33<span class="f-right"><a href="history.php?nome=servo&nometxt">Histórico</a></strong></span></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 mb-2">
-                <div class="card bg-c-purple order-card">
-                    <div class="card-block">
-                        <h6 class="m-b-20"><strong>Led</strong></h6>
-                        <h3 class="text-right"><i class="fa-solid fa-sun spin_reverse"></i></i><span> Ligado</span></h3>
-                        <p class="m-b-0"><strong>Last updatde: 2025/04/07 15:47:33<span class="f-right"><a href="history.php?nome=led&nometxt">Histórico</a></strong></span></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-4">
-            <h2>Tabela de Sensores</h2>
-            <div class="table-responsive-sm">
-                <table class="table table-bordered table-striped text-center">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Tipo de Dispositivo IoT</th>
-                            <th>Valor</th>
-                            <th>Data de Atualização</th>
-                            <th>Estado Alertas</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><a href="history.php?nome=temperatura&nometxt"><?php echo $temperatura["nome"]; ?></a></td>
-                            <td><?php echo formatNumber($temperatura['valor']); ?>º</td>
-                            <td><?php echo $temperatura["hora"]; ?></td>
-                            <?php
-                            switch (true) {
-                                case ($temperatura["valor"] >= 40.00):
-                                    echo "<td><span class='badge bg-danger'>Crítico</span></td>";
-                                    break;
-                                case ($temperatura["valor"] > 20.00 && $temperatura["valor"] < 40.00):
-                                    echo "<td><span class='badge bg-warning'>Elevado</span></td>";
-                                    break;
-                                case ($temperatura["valor"] <= 20.00):
-                                    echo "<td><span class='badge bg-success'>Normal</span></td>";
-                                    break;
-                                default:
-                                    echo "<td class='badge bg-secondary'>Número negativo | Erro de sensor!!</td>";
-                                    break;
-                            }
-                            ?>
-                        </tr>
-                        <tr>
-                            <td><a href="history.php?nome=servo&nometxt"><?php echo $servo["nome"]; ?></a></td>
-                            <td><?php echo formatNumber($servo['valor']); ?>º</td>
-                            <td><?php echo $servo["hora"]; ?></td>
-                            <?php
-                            switch (true) {
-                                case "servo":
-                                    if ($servo["valor"] >= 80.00) {
-                                        echo "<td><span class='badge bg-success'>Fechado</span></td>";
-                                    } elseif ($servo["valor"] < 80.00) {
-                                        echo "<td><span class='badge bg-danger'>Aberto</span></td>";
-                                    }
-                                    break;
-                                default:
-                                    echo "<td class='badge bg-secondary'>Número negativo | Erro de sensor!!</td>";
-                                    break;
-                            }
-                            ?>
-                        </tr>
-                        <tr>
-                            <td><a href="history.php?nome=ultrasonico&nometxt"><?php echo $us["nome"]; ?></a></td>
-                            <td><?php echo formatNumber($us["valor"]); ?>cm</td>
-                            <td><?php echo $us["hora"]; ?></td>
-                            <?php
-                            switch (true) {
-                                case ($us["valor"] >= 100.00):
-                                    echo "<td><span class='badge bg-danger'>Muito Longe</span></td>";
-                                    break;
-                                case ($us["valor"] > 50.00 && $us["valor"] < 100.00):
-                                    echo "<td><span class='badge bg-danger'>Longe</span></td>";
-                                    break;
-                                case ($us["valor"] <= 50.00 && $us["valor"] > 20.00):
-                                    echo "<td><span class='badge bg-warning'>+/- Longe</span></td>";
-                                    break;
-                                case ($us["valor"] <= 20.00 && $us["valor"] > 10.00):
-                                    echo "<td><span class='badge bg-warning'>Perto</span></td>";
-                                    break;
-                                case ($us["valor"] <= 10.00 && $us["valor"] > 0.00):
-                                    echo "<td><span class='badge bg-success'>Muito Perto</span></td>";
-                                    break;
-                                default:
-                                    echo "<td class='badge bg-secondary'>Número negativo | Erro de sensor!!</td>";
-                                    break;
-                            }
-                            ?>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <?php include("add-ons/footer.php"); ?>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>

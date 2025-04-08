@@ -64,19 +64,76 @@ body {
     font-family: 'Roboto', sans-serif;
     scroll-behavior: smooth;
     /* Faz com que a rolagem da página seja suave */
+    overflow-x: hidden;
 }
 
-#navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0 10px 0;
-    background-color: transparent !important;
-    position: static;
-    /* Mantém a barra de navegação fixa no topo */
+#sidebar {
+    min-height: 100vh;
+    width: 250px;
+    position: fixed;
+    z-index: 20;
     top: 0;
-    width: 100%;
-    z-index: 1;
+    left: 0;
+    background-color: var(--background-50) !important;
+    transition: all 0.3s;
+}
+
+#sidebar.collapsed {
+    margin-left: -250px;
+}
+
+#content {
+    margin-left: 250px;
+    padding: 2rem;
+    transition: all 0.3s;
+}
+
+#sidebarToggle {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1030;
+}
+
+#sidebar .nav-link,
+.nav-item {
+    color: black !important;
+    /* Cor do texto dos links */
+    font-weight: 500;
+    /* Peso da fonte dos links */
+    padding: 0.5rem 1rem;
+    /* Espaçamento interno dos links */
+}
+
+#sidebar .nav-link:hover {
+    background-color: gray !important;
+    /* Cor de fundo ao passar o mouse */
+    color: black !important;
+    /* Cor do texto ao passar o mouse */
+}
+#sidebar .nav-link.active {
+    background-color: gray !important;
+    /* Cor de fundo ativa */
+    color: black !important;
+    /* Cor do texto ativo */
+}
+
+#sidebar h4 {
+    padding-top: 5px;
+    color: black;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-left: 10px;
+    text-align: center;
+}
+
+.icon-collapse {
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.icon-collapse.rotate {
+    transform: rotate(180deg);
 }
 
 .container {
@@ -104,4 +161,18 @@ footer {
     position: static;
     /* Mantém o rodapé fixo no fundo da página */
     bottom: 0;
+}
+
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+
+    #sidebar.show {
+        margin-left: 0;
+    }
+
+    #content {
+        margin-left: 0;
+    }
 }
