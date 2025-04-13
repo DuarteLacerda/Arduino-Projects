@@ -26,7 +26,8 @@ if (isset($_POST['username']) && isset($_POST['password'])) { // Verificar se o 
         }
     }
 
-    if ($loginSuccess) {
+    if ($loginSuccess) { // Login bem-sucedido
+        $_SESSION['loggedin'] = true; // Definir a sessão como logada
         $_SESSION['username'] = $email;
         header('Location: ../dashboard.php');
         exit();
@@ -64,10 +65,10 @@ if (isset($_POST['username']) && isset($_POST['password'])) { // Verificar se o 
         exit();
     }
     ?>
-    <img class="background" src="../assets/imagens/bg.svg" alt="Background">
+    <img class="background" src="../assets/imagens/bg.jpeg" alt="Background">
     <div class="container d-flex justify-content-center align-items-center vh-100">
         <form class="AulaForm" action="login.php" method="post">
-            <a href="login.php"><img class="img-fluid formImg" src="../assets/imagens/Duarte Lacerda.png" alt="ESTG" width="350"></a>
+            <a href="login.php"><img class="img-fluid formImg" src="../assets/imagens/ProduceShop.png" alt="ESTG" width="350"></a>
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
                 <input type="text" class="form-control" id="username" name="username" required>
