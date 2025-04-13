@@ -117,7 +117,7 @@ function formatNumber($number) // Formata o número para duas casas decimais e r
             <div class="row mt-4">
                 <h2>Tabela de Sensores</h2>
                 <div class="table-responsive-sm">
-                    <table class="table table-hover text-center align-middle">
+                    <table id="tabela-sensores" class="table table-hover text-center align-middle">
                         <thead class="table-dark">
                             <tr>
                                 <th>Sensor</th>
@@ -167,7 +167,7 @@ function formatNumber($number) // Formata o número para duas casas decimais e r
             <div class="row mt-4">
                 <h2>Tabela de Atuadores</h2>
                 <div class="table-responsive-sm">
-                    <table class="table table-hover text-center align-middle">
+                    <table id="tabela-sensores" class="table table-hover text-center align-middle">
                         <thead class="table-dark">
                             <tr>
                                 <th>Atuador</th>

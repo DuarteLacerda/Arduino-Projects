@@ -13,6 +13,22 @@ async function atualizarSensores() {
         let valorNum = parseFloat(valorBruto); // para comparação
         let valorFormatado = valorBruto; // para mostrar
 
+        const valorSpanTable = document.querySelector(
+          `#tabela-sensores td span#valor-${sensor}`
+        );
+        const horaSpanTable = document.querySelector(
+          `#tabela-sensores td span#hora-${sensor}`
+        );
+
+        console.log(
+          "Sensor:",
+          sensor,
+          "Elementos:",
+          valorSpan,
+          horaSpan,
+          statuSpan
+        ); // Adicionado para depuração
+
         if (sensor === "led") {
           const estado = valorBruto == "1" ? "Ligado" : "Desligado";
           valorFormatado = estado;
@@ -88,6 +104,8 @@ async function atualizarSensores() {
 
         valorSpan.textContent = ` ${valorFormatado}`;
         horaSpan.textContent = dados[sensor].hora;
+        valorSpanTable.textContent = ` ${valorFormatado}`;
+        horaSpanTable.textContent = dados[sensor].hora;
       }
     }
   } catch (erro) {
