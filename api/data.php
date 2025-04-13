@@ -1,0 +1,20 @@
+<?php
+function loadSensorData($nome)
+{
+    $base = "$nome/";
+    return [
+        "nome" => file_get_contents($base . "nome.txt"),
+        "valor" => file_get_contents($base . "valor.txt"),
+        "hora" => file_get_contents($base . "hora.txt")
+    ];
+}
+
+$sensores = ["temperatura", "humidade", "distancia", "ventoinha", "angulo", "led"];
+$data = [];
+
+foreach ($sensores as $sensor) {
+    $data[$sensor] = loadSensorData($sensor);
+}
+
+header('Content-Type: application/json');
+echo json_encode($data);

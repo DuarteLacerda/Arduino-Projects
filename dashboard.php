@@ -61,8 +61,8 @@ function formatNumber($number) // Formata o número para duas casas decimais e r
                     <div class="card bg-c-green order-card">
                         <div class="card-block">
                             <h6 class="m-b-20"><strong><?php echo $temperatura["nome"]; ?></strong></h6>
-                            <h3 class="text-right"><i class="fa-solid fa-temperature-half pulse"></i><span> <?php echo $temperatura["valor"]; ?>ºC</span></h3>
-                            <p class="m-b-0"><strong>Last update: <?php echo $temperatura["hora"]; ?><span class="f-right"><a href="history.php?nome=temperatura&nometxt">Histórico</a></span></strong></p>
+                            <h3 class="text-right"><i class="fa-solid fa-temperature-half pulse"></i><span id="valor-temperatura"></span></h3>
+                            <p class="m-b-0"><strong>Last update: <span id="hora-temperatura"></span><span class="f-right"><a href="history.php?nome=temperatura&nometxt">Histórico</a></span></strong></p>
                         </div>
                     </div>
                 </div>
@@ -70,8 +70,8 @@ function formatNumber($number) // Formata o número para duas casas decimais e r
                     <div class="card bg-c-blue order-card">
                         <div class="card-block">
                             <h6 class="m-b-20"><strong><?php echo $humidade["nome"]; ?></strong></h6>
-                            <h3 class="text-right"><i class="fa-solid fa-droplet pulse"></i><span> <?php echo $humidade["valor"]; ?>%</span></h3>
-                            <p class="m-b-0"><strong>Last update: <?php echo $humidade["hora"]; ?><span class="f-right"><a href="history.php?nome=humidade&nometxt">Histórico</a></span></strong></p>
+                            <h3 class="text-right"><i class="fa-solid fa-droplet pulse"></i><span id="valor-humidade"></span></h3>
+                            <p class="m-b-0"><strong>Last update: <span id="hora-humidade"></span><span class="f-right"><a href="history.php?nome=humidade&nometxt">Histórico</a></span></strong></p>
                         </div>
                     </div>
                 </div>
@@ -79,8 +79,8 @@ function formatNumber($number) // Formata o número para duas casas decimais e r
                     <div class="card bg-c-yellow order-card">
                         <div class="card-block">
                             <h6 class="m-b-20"><strong><?php echo $distancia["nome"]; ?></strong></h6>
-                            <h3 class="text-right"><i class="fa-solid fa-people-arrows pulse"></i><span> <?php echo $distancia["valor"]; ?> cm</span></h3>
-                            <p class="m-b-0"><strong>Last update: <?php echo $distancia["hora"]; ?><span class="f-right"><a href="history.php?nome=distancia&nometxt">Histórico</a></span></strong></p>
+                            <h3 class="text-right"><i class="fa-solid fa-people-arrows pulse"></i><span id="valor-distancia"></span></h3>
+                            <p class="m-b-0"><strong>Last update: <span id="hora-distancia"></span><span class="f-right"><a href="history.php?nome=distancia&nometxt">Histórico</a></span></strong></p>
                         </div>
                     </div>
                 </div>
@@ -90,8 +90,8 @@ function formatNumber($number) // Formata o número para duas casas decimais e r
                     <div class="card bg-c-orange order-card">
                         <div class="card-block">
                             <h6 class="m-b-20"><strong><?php echo $ventoinha["nome"]; ?></strong></h6>
-                            <h3 class="text-right"><i class="fa-solid fa-fan spin"></i><span> <?php echo formatNumber($ventoinha["valor"]); ?> RPM</span></h3>
-                            <p class="m-b-0"><strong>Last update: <?php echo $ventoinha["hora"]; ?><span class="f-right"><a href="history.php?nome=ventoinha&nometxt">Histórico</a></span></strong></p>
+                            <h3 class="text-right"><i class="fa-solid fa-fan spin"></i><span id="valor-ventoinha"></span></h3>
+                            <p class="m-b-0"><strong>Last update: <span id="hora-ventoinha"></span><span class="f-right"><a href="history.php?nome=ventoinha&nometxt">Histórico</a></span></strong></p>
                         </div>
                     </div>
                 </div>
@@ -99,8 +99,8 @@ function formatNumber($number) // Formata o número para duas casas decimais e r
                     <div class="card bg-c-pink order-card">
                         <div class="card-block">
                             <h6 class="m-b-20"><strong><?php echo $angulo["nome"]; ?></strong></h6>
-                            <h3 class="text-right"><i class="fa-solid fa-door-open pulse"></i><span> <?php echo $angulo["valor"]; ?>º</span></h3>
-                            <p class="m-b-0"><strong>Last update: <?php echo $angulo["hora"]; ?><span class="f-right"><a href="history.php?nome=angulo&nometxt">Histórico</a></span></strong></p>
+                            <h3 class="text-right"><i class="fa-solid fa-door-open pulse"></i><span id="valor-angulo"></span></h3>
+                            <p class="m-b-0"><strong>Last update: <span id="hora-angulo"></span><span class="f-right"><a href="history.php?nome=angulo&nometxt">Histórico</a></span></strong></p>
                         </div>
                     </div>
                 </div>
@@ -108,16 +108,8 @@ function formatNumber($number) // Formata o número para duas casas decimais e r
                     <div class="card bg-c-purple order-card">
                         <div class="card-block">
                             <h6 class="m-b-20"><strong><?php echo $led["nome"]; ?></strong></h6>
-                            <h3 class="text-right"><i class="fa-solid fa-sun spin_reverse"></i><span>
-                                    <?php
-                                    if ($led["valor"] == 1) {
-                                        echo "Ligado";
-                                    } else {
-                                        echo "Desligado";
-                                    }
-                                    ?>
-                                </span></h3>
-                            <p class="m-b-0"><strong>Last update: <?php echo $led["hora"]; ?><span class="f-right"><a href="history.php?nome=led&nometxt">Histórico</a></span></strong></p>
+                            <h3 class="text-right"><i class="fa-solid fa-sun spin_reverse"></i><span id="valor-led"></span></h3>
+                            <p class="m-b-0"><strong>Last update: <span id="hora-led"></span><span class="f-right"><a href="history.php?nome=led&nometxt">Histórico</a></span></strong></p>
                         </div>
                     </div>
                 </div>
@@ -142,26 +134,9 @@ function formatNumber($number) // Formata o número para duas casas decimais e r
                                         🌡️ <?php echo $temperatura["nome"]; ?>
                                     </a>
                                 </td>
-                                <td><?php echo $temperatura['valor']; ?>º</td>
-                                <td><?php echo $temperatura["hora"]; ?></td>
-                                <td>
-                                    <?php
-                                    switch (true) {
-                                        case ($temperatura["valor"] >= 40.00):
-                                            echo "<span class='badge bg-warning text-dark'>Alto</span>";
-                                            break;
-                                        case ($temperatura["valor"] > 15.00 && $temperatura["valor"] < 40.00):
-                                            echo "<span class='badge bg-primary'>Normal</span>";
-                                            break;
-                                        case ($temperatura["valor"] <= 15.00):
-                                            echo "<span class='badge bg-success'>fria</span>";
-                                            break;
-                                        default:
-                                            echo "<span class='badge bg-secondary'>Erro</span>";
-                                            break;
-                                    }
-                                    ?>
-                                </td>
+                                <td><span id="valor-temperatura"></span></td>
+                                <td><span id="hora-temperatura"></span></td>
+                                <td><span id="status-temperatura"></span></td>
                             </tr>
                             <!-- Humidade -->
                             <tr>
@@ -170,53 +145,20 @@ function formatNumber($number) // Formata o número para duas casas decimais e r
                                         💧 <?php echo $humidade["nome"]; ?>
                                     </a>
                                 </td>
-                                <td><?php echo $humidade["valor"]; ?>%</td>
-                                <td><?php echo $humidade["hora"]; ?></td>
-                                <td>
-                                    <?php
-                                    if ($humidade["valor"] >= 70.00) {
-                                        echo "<span class='badge bg-warning text-danger'>Alta</span>";
-                                    } elseif ($humidade["valor"] >= 30.00 && $humidade["valor"] < 70.00) {
-                                        echo "<span class='badge bg-success'>Normal</span>";
-                                    } else {
-                                        echo "<span class='badge bg-primary'>Baixa</span>";
-                                    }
-                                    ?>
-                                </td>
+                                <td><span id="valor-humidade"></span></td>
+                                <td><span id="hora-humidade"></span></td>
+                                <td><span id="status-humidade"></span></td>
                             </tr>
-                            <!-- Ultrassónico -->
+                            <!-- distancia -->
                             <tr>
                                 <td>
-                                    <a href="history.php?nome=ultrasonico&nometxt" class="text-decoration-none fw-bold">
+                                    <a href="history.php?nome=distancia&nometxt" class="text-decoration-none fw-bold">
                                         📏 <?php echo $distancia["nome"]; ?>
                                     </a>
                                 </td>
-                                <td><?php echo $distancia["valor"]; ?> cm</td>
-                                <td><?php echo $distancia["hora"]; ?></td>
-                                <td>
-                                    <?php
-                                    switch (true) {
-                                        case ($distancia["valor"] >= 100.00):
-                                            echo "<span class='badge bg-danger'>Muito Longe</span>";
-                                            break;
-                                        case ($distancia["valor"] > 50.00 && $distancia["valor"] < 100.00):
-                                            echo "<span class='badge bg-danger'>Longe</span>";
-                                            break;
-                                        case ($distancia["valor"] <= 50.00 && $distancia["valor"] > 20.00):
-                                            echo "<span class='badge bg-warning text-dark'>+/- Longe</span>";
-                                            break;
-                                        case ($distancia["valor"] <= 20.00 && $distancia["valor"] > 10.00):
-                                            echo "<span class='badge bg-warning text-dark'>Perto</span>";
-                                            break;
-                                        case ($distancia["valor"] <= 10.00 && $distancia["valor"] > 0.00):
-                                            echo "<span class='badge bg-success'>Muito Perto</span>";
-                                            break;
-                                        default:
-                                            echo "<span class='badge bg-secondary'>Erro</span>";
-                                            break;
-                                    }
-                                    ?>
-                                </td>
+                                <td><span id="valor-distancia"></span></td>
+                                <td><span id="hora-distancia"></span></td>
+                                <td><span id="status-distancia"></span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -242,38 +184,20 @@ function formatNumber($number) // Formata o número para duas casas decimais e r
                                         🌬️ <?php echo $ventoinha["nome"]; ?>
                                     </a>
                                 </td>
-                                <td><?php echo formatNumber($ventoinha['valor']); ?> RPM</td>
-                                <td><?php echo $ventoinha["hora"]; ?></td>
-                                <td>
-                                    <?php
-                                    if ($ventoinha["valor"] > 0) {
-                                        echo "<span class='badge bg-success'>Ligada</span>";
-                                    } else {
-                                        echo "<span class='badge bg-danger'>Desligada</span>";
-                                    }
-                                    ?>
-                                </td>
+                                <td><span id="valor-ventoinha"></span></td>
+                                <td><span id="hora-ventoinha"></span></td>
+                                <td><span id="status-ventoinha"></span></td>
                             </tr>
-                            <!-- Servo -->
+                            <!-- angulo -->
                             <tr>
                                 <td>
-                                    <a href="history.php?nome=servo&nometxt" class="text-decoration-none fw-bold">
+                                    <a href="history.php?nome=angulo&nometxt" class="text-decoration-none fw-bold">
                                         ⚙️ <?php echo $angulo["nome"]; ?>
                                     </a>
                                 </td>
-                                <td><?php echo formatNumber($angulo['valor']); ?>º</td>
-                                <td><?php echo $angulo["hora"]; ?></td>
-                                <td>
-                                    <?php
-                                    if ($angulo["valor"] >= 80.00) {
-                                        echo "<span class='badge bg-success'>Fechado</span>";
-                                    } elseif ($angulo["valor"] < 80.00) {
-                                        echo "<span class='badge bg-danger'>Aberto</span>";
-                                    } else {
-                                        echo "<span class='badge bg-secondary'>Erro</span>";
-                                    }
-                                    ?>
-                                </td>
+                                <td><span id="valor-angulo"></span></td>
+                                <td><span id="hora-angulo"></span></td>
+                                <td><span id="status-angulo"></span></td>
                             </tr>
                             <!-- Led -->
                             <tr>
@@ -282,25 +206,9 @@ function formatNumber($number) // Formata o número para duas casas decimais e r
                                         💡 <?php echo $led["nome"]; ?>
                                     </a>
                                 </td>
-                                <td>
-                                    <?php
-                                    if ($led["valor"] == 1) {
-                                        echo "Ligado";
-                                    } else {
-                                        echo "Desligado";
-                                    }
-                                    ?>
-                                </td>
-                                <td><?php echo $led["hora"]; ?></td>
-                                <td>
-                                    <?php
-                                    if ($led["valor"] == 1) {
-                                        echo "<span class='badge bg-success'>Ligado</span>";
-                                    } else {
-                                        echo "<span class='badge bg-danger'>Desligado</span>";
-                                    }
-                                    ?>
-                                </td>
+                                <td><span id="valor-led"></span></td>
+                                <td><span id="hora-led"></span></td>
+                                <td><span id="status-led"></span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -312,6 +220,7 @@ function formatNumber($number) // Formata o número para duas casas decimais e r
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
     <script src="assets/script.js" defer></script>
+    <script src="assets/datascript.js" defer></script>
 </body>
 
 </html>
