@@ -8,7 +8,7 @@ function loadSensorData($nome)
     ];
 }
 
-$sensores = ["temperatura", "humidade", "distancia", "ventoinha", "angulo", "led"];
+$sensores = ["temperatura", "humidade", "distancia", "ventoinha", "cancela", "led"];
 $data = [];
 
 foreach ($sensores as $sensor) {

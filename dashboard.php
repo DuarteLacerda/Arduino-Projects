@@ -5,28 +5,12 @@ if (!isset($_SESSION['loggedin'])) { // Verifica se o utilizador está logado
     die("Acesso Restrito");
 }
 
-function loadSensorData($nome)
-{
-    $base = "api/$nome/";
-    return [
-        "valor" => file_get_contents($base . "valor.txt"),
-        "hora" => file_get_contents($base . "hora.txt"),
-        "nome" => file_get_contents($base . "nome.txt"),
-        "log" => file_get_contents($base . "log.txt")
-    ];
-}
-
-$temperatura = loadSensorData("temperatura");
-$humidade = loadSensorData("humidade");
-$distancia = loadSensorData("distancia");
-$ventoinha = loadSensorData("ventoinha");
-$angulo = loadSensorData("angulo");
-$led = loadSensorData("led");
-
-function formatNumber($number) // Formata o número para duas casas decimais e remove zeros à direita
-{ // Formata o número para duas casas decimais e remove zeros à direita
-    return rtrim(rtrim(number_format($number, 2, '.', ''), '0'), '.');
-}
+$temperatura = array("nome" => file_get_contents("api/temperatura/nome.txt"));
+$humidade = array("nome" => file_get_contents("api/humidade/nome.txt"));
+$distancia = array("nome" => file_get_contents("api/distancia/nome.txt"));
+$ventoinha = array("nome" => file_get_contents("api/ventoinha/nome.txt"));
+$cancela = array("nome" => file_get_contents("api/cancela/nome.txt"));
+$led = array("nome" => file_get_contents("api/led/nome.txt"));
 ?>
 
 <!DOCTYPE html>
@@ -60,7 +44,7 @@ function formatNumber($number) // Formata o número para duas casas decimais e r
                 <div class="col-sm-4 mb-2">
                     <div class="card bg-c-green order-card">
                         <div class="card-block">
-                            <h6 class="m-b-20"><strong><?php echo $temperatura["nome"]; ?></strong></h6>
+                            <h6 class="m-b-20"><strong><?php echo ucfirst($temperatura["nome"]); ?></strong></h6>
                             <h3 class="text-right"><i class="fa-solid fa-temperature-half pulse"></i><span id="valor-temperatura"></span></h3>
                             <p class="m-b-0"><strong>Last update: <span id="hora-temperatura"></span><span class="f-right"><a href="history.php?nome=temperatura&nometxt">Histórico</a></span></strong></p>
                         </div>
@@ -69,7 +53,7 @@ function formatNumber($number) // Formata o número para duas casas decimais e r
                 <div class="col-sm-4 mb-2">
                     <div class="card bg-c-blue order-card">
                         <div class="card-block">
-                            <h6 class="m-b-20"><strong><?php echo $humidade["nome"]; ?></strong></h6>
+                            <h6 class="m-b-20"><strong><?php echo ucfirst($humidade["nome"]); ?></strong></h6>
                             <h3 class="text-right"><i class="fa-solid fa-droplet pulse"></i><span id="valor-humidade"></span></h3>
                             <p class="m-b-0"><strong>Last update: <span id="hora-humidade"></span><span class="f-right"><a href="history.php?nome=humidade&nometxt">Histórico</a></span></strong></p>
                         </div>
@@ -78,7 +62,7 @@ function formatNumber($number) // Formata o número para duas casas decimais e r
                 <div class="col-sm-4 mb-2">
                     <div class="card bg-c-yellow order-card">
                         <div class="card-block">
-                            <h6 class="m-b-20"><strong><?php echo $distancia["nome"]; ?></strong></h6>
+                            <h6 class="m-b-20"><strong><?php echo ucfirst($distancia["nome"]); ?></strong></h6>
                             <h3 class="text-right"><i class="fa-solid fa-people-arrows pulse"></i><span id="valor-distancia"></span></h3>
                             <p class="m-b-0"><strong>Last update: <span id="hora-distancia"></span><span class="f-right"><a href="history.php?nome=distancia&nometxt">Histórico</a></span></strong></p>
                         </div>
@@ -89,7 +73,7 @@ function formatNumber($number) // Formata o número para duas casas decimais e r
                 <div class="col-sm-4 mb-2">
                     <div class="card bg-c-orange order-card">
                         <div class="card-block">
-                            <h6 class="m-b-20"><strong><?php echo $ventoinha["nome"]; ?></strong></h6>
+                            <h6 class="m-b-20"><strong><?php echo ucfirst($ventoinha["nome"]); ?></strong></h6>
                             <h3 class="text-right"><i class="fa-solid fa-fan spin"></i><span id="valor-ventoinha"></span></h3>
                             <p class="m-b-0"><strong>Last update: <span id="hora-ventoinha"></span><span class="f-right"><a href="history.php?nome=ventoinha&nometxt">Histórico</a></span></strong></p>
                         </div>
@@ -98,16 +82,16 @@ function formatNumber($number) // Formata o número para duas casas decimais e r
                 <div class="col-sm-4 mb-2">
                     <div class="card bg-c-pink order-card">
                         <div class="card-block">
-                            <h6 class="m-b-20"><strong><?php echo $angulo["nome"]; ?></strong></h6>
-                            <h3 class="text-right"><i class="fa-solid fa-door-open pulse"></i><span id="valor-angulo"></span></h3>
-                            <p class="m-b-0"><strong>Last update: <span id="hora-angulo"></span><span class="f-right"><a href="history.php?nome=angulo&nometxt">Histórico</a></span></strong></p>
+                            <h6 class="m-b-20"><strong><?php echo ucfirst($cancela["nome"]); ?></strong></h6>
+                            <h3 class="text-right"><i class="fa-solid fa-door-open pulse"></i><span id="valor-cancela"></span></h3>
+                            <p class="m-b-0"><strong>Last update: <span id="hora-cancela"></span><span class="f-right"><a href="history.php?nome=cancela&nometxt">Histórico</a></span></strong></p>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-4 mb-2">
                     <div class="card bg-c-purple order-card">
                         <div class="card-block">
-                            <h6 class="m-b-20"><strong><?php echo $led["nome"]; ?></strong></h6>
+                            <h6 class="m-b-20"><strong><?php echo ucfirst($led["nome"]); ?></strong></h6>
                             <h3 class="text-right"><i class="fa-solid fa-sun spin_reverse"></i><span id="valor-led"></span></h3>
                             <p class="m-b-0"><strong>Last update: <span id="hora-led"></span><span class="f-right"><a href="history.php?nome=led&nometxt">Histórico</a></span></strong></p>
                         </div>
@@ -131,10 +115,10 @@ function formatNumber($number) // Formata o número para duas casas decimais e r
                             <tr>
                                 <td>
                                     <a href="history.php?nome=temperatura&nometxt" class="text-decoration-none fw-bold">
-                                        🌡️ <?php echo $temperatura["nome"]; ?>
+                                        🌡️ <?php echo ucfirst($temperatura["nome"]); ?>
                                     </a>
                                 </td>
-                                <td><span id="valor-temperatura"></span></td>
+                                <td><span id="valor-temperatura"></span>ºC</td>
                                 <td><span id="hora-temperatura"></span></td>
                                 <td><span id="status-temperatura"></span></td>
                             </tr>
@@ -142,10 +126,10 @@ function formatNumber($number) // Formata o número para duas casas decimais e r
                             <tr>
                                 <td>
                                     <a href="history.php?nome=humidade&nometxt" class="text-decoration-none fw-bold">
-                                        💧 <?php echo $humidade["nome"]; ?>
+                                        💧 <?php echo ucfirst($humidade["nome"]); ?>
                                     </a>
                                 </td>
-                                <td><span id="valor-humidade"></span></td>
+                                <td><span id="valor-humidade"></span>%</td>
                                 <td><span id="hora-humidade"></span></td>
                                 <td><span id="status-humidade"></span></td>
                             </tr>
@@ -153,10 +137,10 @@ function formatNumber($number) // Formata o número para duas casas decimais e r
                             <tr>
                                 <td>
                                     <a href="history.php?nome=distancia&nometxt" class="text-decoration-none fw-bold">
-                                        📏 <?php echo $distancia["nome"]; ?>
+                                        📏 <?php echo ucfirst($distancia["nome"]); ?>
                                     </a>
                                 </td>
-                                <td><span id="valor-distancia"></span></td>
+                                <td><span id="valor-distancia"></span> cm</td>
                                 <td><span id="hora-distancia"></span></td>
                                 <td><span id="status-distancia"></span></td>
                             </tr>
@@ -181,29 +165,29 @@ function formatNumber($number) // Formata o número para duas casas decimais e r
                             <tr>
                                 <td>
                                     <a href="history.php?nome=ventoinha&nometxt" class="text-decoration-none fw-bold">
-                                        🌬️ <?php echo $ventoinha["nome"]; ?>
+                                        🌬️ <?php echo ucfirst($ventoinha["nome"]); ?>
                                     </a>
                                 </td>
-                                <td><span id="valor-ventoinha"></span></td>
+                                <td><span id="valor-ventoinha"></span> RPM</td>
                                 <td><span id="hora-ventoinha"></span></td>
                                 <td><span id="status-ventoinha"></span></td>
                             </tr>
-                            <!-- angulo -->
+                            <!-- cancela -->
                             <tr>
                                 <td>
-                                    <a href="history.php?nome=angulo&nometxt" class="text-decoration-none fw-bold">
-                                        ⚙️ <?php echo $angulo["nome"]; ?>
+                                    <a href="history.php?nome=cancela&nometxt" class="text-decoration-none fw-bold">
+                                        ⚙️ <?php echo ucfirst($cancela["nome"]); ?>
                                     </a>
                                 </td>
-                                <td><span id="valor-angulo"></span></td>
-                                <td><span id="hora-angulo"></span></td>
-                                <td><span id="status-angulo"></span></td>
+                                <td><span id="valor-cancela"></span>º</td>
+                                <td><span id="hora-cancela"></span></td>
+                                <td><span id="status-cancela"></span></td>
                             </tr>
                             <!-- Led -->
                             <tr>
                                 <td>
                                     <a href="history.php?nome=led&nometxt" class="text-decoration-none fw-bold">
-                                        💡 <?php echo $led["nome"]; ?>
+                                        💡 <?php echo ucfirst($led["nome"]); ?>
                                     </a>
                                 </td>
                                 <td><span id="valor-led"></span></td>
