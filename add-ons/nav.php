@@ -41,7 +41,7 @@
             <!-- Logout -->
             <li class="nav-item mt-3">
                 <form action="auth/logout.php" method="get">
-                    <button class="btn btn-outline-dark w-100">Logout</button>
+                    <button class="btn btn-outline-dark w-100">Terminar Sessão</button>
                 </form>
             </li>
         </ul>
